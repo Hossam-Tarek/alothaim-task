@@ -39,7 +39,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ request()->routeIs(['admin.tasks.index', 'admin.tasks.create']) ? 'menu-open' : '' }}">
+                <li class="nav-item {{ request()->routeIs(['tasks.index', 'tasks.create']) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="fas fa-tasks mx-1"></i>
                         <p class="mx-2">
@@ -49,16 +49,16 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-{{--                            <a href="{{ route('admin.tasks.index') }}" class="nav-link {{ request()->routeIs('admin.tasks.index') ? 'active' : '' }}">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>{{ __('Tasks') }}</p>--}}
-{{--                            </a>--}}
+                            <a href="{{ route('tasks.index') }}" class="nav-link {{ request()->routeIs('tasks.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Tasks') }}</p>
+                            </a>
                         </li>
                         <li class="nav-item">
-{{--                            <a href="{{ route('admin.tasks.create') }}" class="nav-link {{ request()->routeIs('admin.tasks.create') ? 'active' : '' }}">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>{{ __('Add Task') }}</p>--}}
-{{--                            </a>--}}
+                            <a href="{{ route('tasks.create') }}" class="nav-link {{ request()->routeIs('tasks.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('Add Task') }}</p>
+                            </a>
                         </li>
                     </ul>
                 </li>

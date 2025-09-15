@@ -1,7 +1,7 @@
 <x-admin.layouts.card>
     <x-slot name="pageTitle">{{ __('Tasks') }}</x-slot>
     <x-slot name="cardHeader">
-        <a href="{{ route('admin.tasks.create') }}" class="btn btn-secondary float-right"><i class="fas fa-plus"></i><span class="mx-2"> {{ __('Add Task') }}</span></a>
+        <a href="{{ route('tasks.create') }}" class="btn btn-secondary float-right"><i class="fas fa-plus"></i><span class="mx-2"> {{ __('Add Task') }}</span></a>
     </x-slot>
 
     <x-slot name="breadcrumb">
@@ -14,8 +14,9 @@
         <tr>
             <th>{{ __("Title") }}</th>
             <th>{{ __("Description") }}</th>
-            <th>{{ __("Assigned name") }}</th>
-            <th>{{ __("Admin name") }}</th>
+            <th>{{ __("status") }}</th>
+            <th>{{ __("Assigned to") }}</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -25,14 +26,20 @@
             <tr>
                 <td>{{ $task->title }}</td>
                 <td>{{ $task->description }}</td>
-                <td>{{ $task->assignedTo->name }}</td>
-                <td>{{ $task->assignedBy->name }}</td>
                 <td>
-                    <a href="{{ route("admin.tasks.edit", $task) }}" class="btn btn-secondary"
+                    <span class="badge bg-{{ $task->status_color }}">{{ $task->status_label }}</span>
+                </td>
+                <td>{{ $task->assignedTo->name }}</td>
+                <td>
+                    <a href="{{ route("tasks.show", $task) }}" class="btn btn-primary"
+                    >{{ __("show") }}</a>
+                </td>
+                <td>
+                    <a href="{{ route("tasks.edit", $task) }}" class="btn btn-secondary"
                     >{{ __("Edit") }}</a>
                 </td>
                 <td>
-                    <form action="{{ route("admin.tasks.destroy", $task) }}" method="POST">
+                    <form action="{{ route("tasks.destroy", $task) }}" method="POST">
                         @csrf
                         @method("delete")
                         <input type="submit" name="delete" value="{{ __("Delete") }}" class="btn btn-danger">

@@ -2,7 +2,7 @@
     <x-slot name="pageTitle">{{ __('Tasks') }}</x-slot>
     <x-slot name="cardHeader">{{ __('Edit Task') }}</x-slot>
 
-    <form action="{{ route('admin.tasks.update', $task) }}" method="POST">
+    <form action="{{ route('tasks.update', $task) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -10,16 +10,15 @@
         <x-form.textarea name="description" value="{{ $task->description }}">{{ __('Description') }}</x-form.textarea>
 
         <div class="form-group">
-            <label for="assigned_by_id">{{ __('Assign by') }}</label>
-            <select name="assigned_by_id" id="assigned_by_id" class="form-control @error("assigned_by_id") is-invalid @enderror">
-                <option value="">{{ __('Select User') }}</option>
-                @foreach($admins as $admin)
-                    <option value="{{ $admin->id }}" {{ $admin->id == $task->assigned_by_id ? 'selected': '' }}>{{ $admin->name }} - {{ $admin->email }}</option>
+            <label for="status">{{ __('Assign to') }}</label>
+            <select name="status" id="status" class="form-control @error("status") is-invalid @enderror">
+                @foreach(\App\Enums\TaskStatusEnum::cases() as $case)
+                    <option value="{{ $case->value }}" {{ $task->status == $case ? 'selected': '' }}>{{ $case->label() }}</option>
                 @endforeach
             </select>
 
-            @error("assigned_by_id")
-                <p class="help text-danger">{{ $errors->first("assigned_by_id") }}</p>
+            @error("assigned_to_id")
+            <p class="help text-danger">{{ $errors->first("assigned_to_id") }}</p>
             @enderror
         </div>
 
@@ -37,6 +36,6 @@
             @enderror
         </div>
 
-        <x-form.submit redirectRoute="{{ route('admin.tasks.store') }}">{{ __('Create') }}</x-form.submit>
+        <x-form.submit redirectRoute="{{ route('tasks.store') }}">{{ __('Update') }}</x-form.submit>
     </form>
 </x-admin.layouts.card>
