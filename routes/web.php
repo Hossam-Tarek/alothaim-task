@@ -12,6 +12,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
-Route::resource('tasks', TaskController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::resource('tasks', TaskController::class);
+});
