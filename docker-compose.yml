@@ -17,7 +17,6 @@ services:
         build: ./docker/nginx
         ports:
             - "80:80"
-            - "403:403"
         volumes:
             - ./:/var/www/html
         depends_on:
